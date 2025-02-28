@@ -26,58 +26,64 @@ class SignupActivity : AppCompatActivity() {
         enableEdgeToEdge()
 
         //yeha initialize garney
-        binding=ActivitySignupBinding.inflate(layoutInflater)
+        binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        loadingUtils= LoadingUtils(this)
+        loadingUtils = LoadingUtils(this)
 
 
-        var repo= UserRepositoryImpl()
-        userViewModel= UserViewModel(repo)
+        var repo = UserRepositoryImpl()
+        userViewModel = UserViewModel(repo)
 
 
         binding.signUp.setOnClickListener {
+            val email = binding.registerEmail.text.toString().trim()
+            val password = binding.registerPassword.text.toString().trim()
+            val firstName = binding.registerFname.text.toString().trim()
+            val lastName = binding.registerLName.text.toString().trim()
+            val address = binding.registerAddress.text.toString().trim()
+            val phoneNumber = binding.registerContact.text.toString().trim()
+
+            if (email.isEmpty() || password.isEmpty() || firstName.isEmpty() ||
+                lastName.isEmpty() || address.isEmpty() || phoneNumber.isEmpty()
+            ) {
+                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             loadingUtils.show()
 
-            var email = binding.registerEmail.text.toString()
-            var password = binding.registerPassword.text.toString()
-            var firstName = binding.registerFname.text.toString()
-            var lastName = binding.registerLName.text.toString()
-            var address = binding.registerAddress.text.toString()
-            var phoneNumber=binding.registerContact.text.toString()
-
-            userViewModel.signup(email,password){
-                    success,message,userId->
-                if (success){
-                    var userModel = UserModel(
-                        userId.toString(),firstName,
-                        lastName, address,
-                        phoneNumber, email
-                    )
-                    userViewModel.addUserToDatabase(userId,userModel){
-                            success,message->
-                        if (success){
-                            var intent =Intent(this@SignupActivity, LoginActivity::class.java)
-                            startActivity(intent)
+            userViewModel.signup(email, password) { success, message, userId ->
+                if (success) {
+                    val userModel =
+                        UserModel(userId, firstName, lastName, address, phoneNumber, email)
+                    userViewModel.addUserToDatabase(userId, userModel) { dbSuccess, dbMessage ->
+                        loadingUtils.dismiss()
+                        if (dbSuccess) {
+                            startActivity(Intent(this@SignupActivity, LoginActivity::class.java))
                             Toast.makeText(
                                 this@SignupActivity,
-                                message, Toast.LENGTH_LONG
+                                "Signup Successful!",
+                                Toast.LENGTH_LONG
                             ).show()
-                        }else{
-                            loadingUtils.dismiss()
+                            finish()
+                        } else {
                             Toast.makeText(
                                 this@SignupActivity,
-                                message, Toast.LENGTH_LONG
+                                "Database Error: $dbMessage",
+                                Toast.LENGTH_LONG
                             ).show()
                         }
                     }
-
-                }else{
-                    Toast.makeText(this@SignupActivity,
-                        message, Toast.LENGTH_LONG).show()
+                } else {
+                    loadingUtils.dismiss()
+                    Toast.makeText(
+                        this@SignupActivity,
+                        "Signup Failed: $message",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
-
         }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

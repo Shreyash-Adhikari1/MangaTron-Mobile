@@ -36,16 +36,21 @@ class UserRepositoryImpl: UserRepository {
         password: String,
         callback: (Boolean, String, String) -> Unit
     ) {
-        auth.createUserWithEmailAndPassword(email,password)
-            .addOnCompleteListener{
-                if (it.isSuccessful){
-                    callback(true,"Registration Succesful",
-                        auth.currentUser?.uid.toString())
-                }else{
-                    callback(false,it.exception?.message.toString(),"")
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val userId = auth.currentUser?.uid
+                    if (userId != null) {
+                        callback(true, "Registration Successful", userId)
+                    } else {
+                        callback(false, "Error: User ID is null", "")
+                    }
+                } else {
+                    callback(false, task.exception?.localizedMessage ?: "Unknown error", "")
                 }
             }
     }
+
 
     override fun addUserToDatabase(
         userId: String,

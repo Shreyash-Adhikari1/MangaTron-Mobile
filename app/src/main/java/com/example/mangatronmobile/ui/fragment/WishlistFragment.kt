@@ -5,10 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.mangatronmobile.R
 import com.example.mangatronmobile.databinding.FragmentFavouritesBinding
 
-class FavouritesFragment : Fragment() {
+class WishlistFragment : Fragment() {
     lateinit var binding: FragmentFavouritesBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

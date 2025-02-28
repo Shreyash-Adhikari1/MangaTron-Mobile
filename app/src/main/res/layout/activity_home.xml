@@ -25,39 +25,40 @@
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/navigation_bar" />
 
+        <!-- Search Icon -->
+
+        <!-- Hamburger Menu -->
+
         <FrameLayout
             android:id="@+id/mainFrame"
-            android:layout_width="411dp"
-            android:layout_height="764dp"
-            android:layout_marginTop="12dp"
+            android:layout_width="410dp"
+            android:layout_height="618dp"
             android:layout_marginEnd="1dp"
-            android:layout_marginBottom="4dp"
             app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchIcon">
+            app:layout_constraintTop_toBottomOf="@+id/homeTitle"
+            app:layout_constraintVertical_bias="1.0">
 
         </FrameLayout>
 
-        <!-- Search Icon -->
         <ImageView
             android:id="@+id/searchIcon"
             android:layout_width="30dp"
             android:layout_height="34dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="76dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="44dp"
+            app:layout_constraintStart_toEndOf="@+id/homeTitle"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/search" />
 
-        <!-- Hamburger Menu -->
         <ImageView
             android:id="@+id/homeHamburger"
             android:layout_width="30dp"
             android:layout_height="34dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="44dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/hamburger_icon" />
@@ -66,7 +67,7 @@
             android:id="@+id/homeProfile"
             android:layout_width="30dp"
             android:layout_height="34dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="44dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -76,8 +77,8 @@
             android:id="@+id/homeTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="40dp"
             android:text="MangaTron"
             android:textSize="28sp"
             android:textStyle="bold"

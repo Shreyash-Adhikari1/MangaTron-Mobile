@@ -9,9 +9,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.mangatronmobile.R
 import com.example.mangatronmobile.databinding.ActivityHomeBinding
-import com.example.mangatronmobile.ui.fragment.AddProductFragment
 import com.example.mangatronmobile.ui.fragment.CategoryFragment
-import com.example.mangatronmobile.ui.fragment.FavouritesFragment
+import com.example.mangatronmobile.ui.fragment.WishlistFragment
 import com.example.mangatronmobile.ui.fragment.HomeFragment
 import com.example.mangatronmobile.ui.fragment.SearchFragment
 import com.google.android.material.navigation.NavigationView
@@ -54,8 +53,7 @@ class HomeActivity : AppCompatActivity() {
             when(menu.itemId){
                 R.id.navHome -> replaceFragment(HomeFragment())
                 R.id.navCategory -> replaceFragment(CategoryFragment())
-                R.id.navAddManga -> replaceFragment(AddProductFragment())
-                R.id.navFavourites -> replaceFragment(FavouritesFragment())
+                R.id.navFavourites -> replaceFragment(WishlistFragment())
 
                 else -> {}
             }
