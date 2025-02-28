@@ -15,7 +15,7 @@
 
 
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/displayProductImage"
                 android:layout_width="182dp"
                 android:layout_height="173dp"
                 android:layout_marginStart="4dp"
@@ -31,7 +31,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="29dp"
                 android:text="TextView"
-                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                app:layout_constraintStart_toEndOf="@+id/displayProductImage"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -41,7 +41,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="7dp"
                 android:text="TextView"
-                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                app:layout_constraintStart_toEndOf="@+id/displayProductImage"
                 app:layout_constraintTop_toBottomOf="@+id/displayProductName" />
 
             <TextView
@@ -51,7 +51,7 @@
                 android:layout_marginStart="21dp"
                 android:layout_marginTop="6dp"
                 android:text="TextView"
-                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                app:layout_constraintStart_toEndOf="@+id/displayProductImage"
                 app:layout_constraintTop_toBottomOf="@+id/displayProductDesc" />
 
             <TextView

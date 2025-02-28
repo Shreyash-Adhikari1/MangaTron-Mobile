@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
 import com.example.mangatronmobile.R
 import com.example.mangatronmobile.databinding.ActivityAddProductBinding
 import com.example.mangatronmobile.model.ProductModel
@@ -15,18 +16,14 @@ import com.example.mangatronmobile.repository.ProductRepositoryImpl
 import com.example.mangatronmobile.utils.ImageUtils
 import com.example.mangatronmobile.utils.LoadingUtils
 import com.example.mangatronmobile.viewmodel.ProductViewModel
-import com.squareup.picasso.Picasso
 
 class AddProductActivity : AppCompatActivity() {
-    lateinit var binding: ActivityAddProductBinding
+    private lateinit var binding: ActivityAddProductBinding
+    private lateinit var productViewModel: ProductViewModel
+    private lateinit var loadingUtils: LoadingUtils
+    private lateinit var imageUtils: ImageUtils
 
-    lateinit var productViewModel: ProductViewModel
-
-    lateinit var loadingUtils: LoadingUtils
-
-    lateinit var imageUtils: ImageUtils
-
-    var imageUri: Uri? = null
+    private var imageUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,45 +34,50 @@ class AddProductActivity : AppCompatActivity() {
         loadingUtils = LoadingUtils(this)
         imageUtils = ImageUtils(this)
 
-        var repo = ProductRepositoryImpl()
+        val repo = ProductRepositoryImpl()
         productViewModel = ProductViewModel(repo)
 
         imageUtils.registerActivity { url ->
-            url.let { it ->
+            url?.let {
                 imageUri = it
-                Picasso.get().load(it).into(binding.imageBrowse)
+                Glide.with(this)
+                    .load(it)
+                    .placeholder(R.drawable.placeholder)
+                    .into(binding.imageBrowse)
             }
         }
+
         binding.imageBrowse.setOnClickListener {
             imageUtils.launchGallery(this)
         }
+
         binding.btnAddProduct.setOnClickListener {
+            Log.d("Image Upload", "Uploading image: $imageUri")
             uploadImage()
-
-            binding.btnAddProduct.setOnClickListener {
-
-                uploadImage()
-            }
-            ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-                val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-                insets
-            }
         }
 
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
     }
 
     private fun uploadImage() {
         loadingUtils.show()
         imageUri?.let { uri ->
             productViewModel.uploadImage(this, uri) { imageUrl ->
-                Log.d("checpoirs", imageUrl.toString())
+                Log.d("Upload Status", imageUrl.toString())
                 if (imageUrl != null) {
                     addProduct(imageUrl)
                 } else {
                     Log.e("Upload Error", "Failed to upload image to Cloudinary")
+                    loadingUtils.dismiss()
                 }
             }
+        } ?: run {
+            Toast.makeText(this, "Please select an image", Toast.LENGTH_LONG).show()
+            loadingUtils.dismiss()
         }
     }
 
@@ -100,14 +102,9 @@ class AddProductActivity : AppCompatActivity() {
         )
 
         productViewModel.addProduct(model) { success, message ->
-            if (success) {
-                Toast.makeText(this@AddProductActivity, message, Toast.LENGTH_LONG).show()
-                finish()
-            } else {
-                Toast.makeText(this@AddProductActivity, message, Toast.LENGTH_LONG).show()
-            }
+            Toast.makeText(this@AddProductActivity, message, Toast.LENGTH_LONG).show()
+            if (success) finish()
             loadingUtils.dismiss()
         }
     }
-
 }

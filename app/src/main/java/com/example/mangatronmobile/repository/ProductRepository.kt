@@ -33,6 +33,9 @@ interface ProductRepository {
     fun getAllProduct(callback: (List<ProductModel>?,
                                  Boolean, String) -> Unit)
 
+    fun getProductByCategory(category: String, callback: (List<ProductModel>?, Boolean, String) -> Unit)
+
+
 
     fun uploadImage(context: Context, imageUri: Uri, callback: (String?) -> Unit)
 

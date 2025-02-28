@@ -35,8 +35,8 @@
 
             <ImageView
                 android:id="@+id/imageBrowse"
-                android:layout_width="361dp"
-                android:layout_height="195dp"
+                android:layout_width="373dp"
+                android:layout_height="157dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
@@ -155,8 +155,8 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="112dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="28dp"
         android:text="MangaTron"
         android:textSize="28sp"
         android:textStyle="bold"

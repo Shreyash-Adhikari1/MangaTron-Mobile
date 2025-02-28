@@ -10,6 +10,7 @@ ProductModel(
     var productDesc: String = "",
     var productCategory: String="",
     var productPrice: Int = 0,
+    var productImage: String="",
     var imageUrl: String = "",
 
     ):Parcelable  {
@@ -19,6 +20,7 @@ ProductModel(
         parcel.readString()?:"",
         parcel.readString()?:"",
         parcel.readInt()?:0,
+        parcel.readString()?:"",
         parcel.readString()?:""
     ) {
     }
@@ -29,6 +31,7 @@ ProductModel(
         parcel.writeString(productDesc)
         parcel.writeString(productCategory)
         parcel.writeInt(productPrice)
+        parcel.writeString(productImage)
         parcel.writeString(imageUrl)
     }
 

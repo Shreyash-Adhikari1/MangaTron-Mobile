@@ -51,10 +51,23 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //This dependency is for replacing entire fragments off of components inside a fragment
+    implementation ("androidx.fragment:fragment-ktx:1.6.2")
+
+    //These Dependencies are for firebase
     implementation("com.google.firebase:firebase-auth-ktx:22.1.2")
     implementation("com.google.firebase:firebase-database-ktx:20.3.1")
     implementation("com.google.firebase:firebase-analytics-ktx:21.5.1")
+
+    //This dependency is for the animation
     implementation ("com.airbnb.android:lottie:6.6.1")
+
+    //This dependency is for cloudinary
     implementation("com.cloudinary:cloudinary-android:2.1.0")
-    implementation("com.squareup.picasso:picasso:2.8")
+
+    //These Dependencies are for Glide {bring image from cloudinary to display in application}
+    //Not using Picasso because Glide is faster and more efficient
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
 }

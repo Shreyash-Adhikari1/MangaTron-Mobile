@@ -107,6 +107,34 @@ class ProductRepositoryImpl : ProductRepository {
         })
     }
 
+    override fun getProductByCategory(
+        category: String,
+        callback: (List<ProductModel>?, Boolean, String) -> Unit
+    ) {
+        ref.orderByChild("productCategory").equalTo(category)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val products = mutableListOf<ProductModel>()
+                    if (snapshot.exists()) {
+                        for (eachProduct in snapshot.children) {
+                            val data = eachProduct.getValue(ProductModel::class.java)
+                            if (data != null) {
+                                products.add(data)
+                            }
+                        }
+                        callback(products, true, "Products fetched successfully")
+                    } else {
+                        callback(null, false, "No products found")
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    callback(null, false, error.message)
+                }
+            })
+    }
+
+
     private val cloudinary = Cloudinary(
         mapOf(
             "cloud_name" to "dccum3yur",
@@ -125,10 +153,13 @@ class ProductRepositoryImpl : ProductRepository {
 
                 val response = cloudinary.uploader().upload(
                     inputStream, ObjectUtils.asMap(
-                        "public_id", fileName,
+                        "folder", "products",
+                        "public_id", "products/$fileName",
                         "resource_type", "image"
                     )
                 )
+
+
 
                 var imageUrl = response["url"] as String?
 
