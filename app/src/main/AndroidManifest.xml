@@ -18,16 +18,22 @@
         tools:replace="android:fullBackupContent"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activity.AddProductActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ui.activity.HomeActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ui.activity.SignupActivity"
+            android:name=".ui.activity.admin.UpdateProductActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.SplashActivity"
+            android:name=".ui.activity.admin.AdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.admin.AddProductActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activity.home.HomeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activity.login_register.SignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.login_register.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +42,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.LoginActivity"
+            android:name=".ui.activity.login_register.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -50,4 +56,3 @@
     </application>
 
 </manifest>
-

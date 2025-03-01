@@ -1,4 +1,4 @@
-package com.example.mangatronmobile.ui.activity
+package com.example.mangatronmobile.ui.activity.home
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.mangatronmobile.R
 import com.example.mangatronmobile.databinding.ActivityHomeBinding
+import com.example.mangatronmobile.ui.fragment.CartFragment
 import com.example.mangatronmobile.ui.fragment.CategoryFragment
 import com.example.mangatronmobile.ui.fragment.WishlistFragment
 import com.example.mangatronmobile.ui.fragment.HomeFragment
@@ -41,9 +42,8 @@ class HomeActivity : AppCompatActivity() {
             when (menuItem.itemId) {
                 R.id.nav_home -> replaceFragment(HomeFragment())
                 R.id.nav_category -> replaceFragment(CategoryFragment())
-                R.id.nav_about_us -> {
-                    // Just In-Cse we decide to make an about us section
-                }
+                R.id.nav_cart -> replaceFragment(CartFragment())
+                R.id.nav_wishlist-> replaceFragment(WishlistFragment())
             }
             drawerLayout.closeDrawers()
             true
@@ -53,7 +53,8 @@ class HomeActivity : AppCompatActivity() {
             when(menu.itemId){
                 R.id.navHome -> replaceFragment(HomeFragment())
                 R.id.navCategory -> replaceFragment(CategoryFragment())
-                R.id.navFavourites -> replaceFragment(WishlistFragment())
+                R.id.navCart->replaceFragment(CartFragment())
+                R.id.navWishlist -> replaceFragment(WishlistFragment())
 
                 else -> {}
             }

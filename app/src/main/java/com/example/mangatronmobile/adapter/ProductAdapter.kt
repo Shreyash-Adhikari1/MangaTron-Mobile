@@ -1,22 +1,21 @@
-package com.example.mangatronmobile.adapter
-
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mangatronmobile.R
 import com.example.mangatronmobile.model.ProductModel
-import com.example.mangatronmobile.ui.fragment.UpdateProductFragment
+import com.example.mangatronmobile.ui.activity.admin.UpdateProductActivity
 
 class ProductAdapter(
     private val context: Context,
-    private var data: ArrayList<ProductModel>
+    private var data: ArrayList<ProductModel>,
+    private val onAddToCartClick: (ProductModel) -> Unit
 ) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -25,6 +24,7 @@ class ProductAdapter(
         val pDesc: TextView = itemView.findViewById(R.id.displayProductDesc)
         val pImage: ImageView = itemView.findViewById(R.id.displayProductImage)
         val edit: TextView = itemView.findViewById(R.id.lblEdit)
+        val AddToCart: ImageView = itemView.findViewById(R.id.addToCart)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -37,7 +37,7 @@ class ProductAdapter(
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        val product = data[position] // Get the current product
+        val product = data[position]
 
         holder.pName.text = product.productName
         holder.pPrice.text = product.productPrice.toString()
@@ -47,24 +47,24 @@ class ProductAdapter(
         Glide.with(context)
             .load(product.productImage)
             .placeholder(R.drawable.placeholder)
-            .error(R.drawable.error) // Image to show if loading fails
+            .error(R.drawable.error)
             .into(holder.pImage)
 
         holder.edit.setOnClickListener {
-            val intent = Intent(context, UpdateProductFragment::class.java)
+            val intent = Intent(context, UpdateProductActivity::class.java)
             intent.putExtra("productId", product.productId)
             context.startActivity(intent)
         }
-    }
 
+        holder.AddToCart.setOnClickListener {
+            Log.d("CartDebug", "Add to Cart clicked for product: ${product.productName}")
+            onAddToCartClick(product)
+        }
+    }
 
     fun updateData(products: List<ProductModel>) {
         data.clear()
         data.addAll(products)
         notifyDataSetChanged()
-    }
-
-    fun getProductId(position: Int): String {
-        return data[position].productId
     }
 }

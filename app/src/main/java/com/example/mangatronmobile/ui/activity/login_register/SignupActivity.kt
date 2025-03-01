@@ -1,4 +1,4 @@
-package com.example.mangatronmobile.ui.activity
+package com.example.mangatronmobile.ui.activity.login_register
 
 import android.content.Intent
 import android.os.Bundle

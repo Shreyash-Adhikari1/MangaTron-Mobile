@@ -52,6 +52,10 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+
+    //This dependency is added to implement shared preferences
+    implementation ("com.google.code.gson:gson:2.10.1")
+
     //This dependency is for replacing entire fragments off of components inside a fragment
     implementation ("androidx.fragment:fragment-ktx:1.6.2")
 

@@ -1,5 +1,6 @@
 package com.example.mangatronmobile.ui.fragment
 
+import FigurineFragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.example.mangatronmobile.ui.activity
+package com.example.mangatronmobile.ui.activity.admin
 
 import android.net.Uri
 import android.os.Bundle
@@ -85,7 +85,7 @@ class AddProductActivity : AppCompatActivity() {
         val productName = binding.editProductName.text.toString().trim()
         val productDesc = binding.editProductDesc.text.toString().trim()
         val productCategory = binding.editProductCategory.text.toString().trim()
-        val productPrice = binding.editProductPrice.text.toString().trim().toIntOrNull() ?: 0
+        val productPrice = binding.editProductPrice.text.toString().trim().toInt() ?: 0
 
         if (productName.isEmpty() || productDesc.isEmpty() || productCategory.isEmpty()) {
             Toast.makeText(this, "All fields are required", Toast.LENGTH_LONG).show()

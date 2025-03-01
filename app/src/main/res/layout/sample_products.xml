@@ -7,7 +7,9 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="411dp"
-        android:layout_height="179dp">
+        android:layout_height="179dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -28,19 +30,20 @@
                 android:id="@+id/displayProductName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="29dp"
-                android:text="TextView"
+                android:text="Product Name"
+                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/displayProductImage"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/displayProductDesc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_width="123dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="7dp"
-                android:text="TextView"
+                android:text=" Product Descrition"
                 app:layout_constraintStart_toEndOf="@+id/displayProductImage"
                 app:layout_constraintTop_toBottomOf="@+id/displayProductName" />
 
@@ -48,21 +51,54 @@
                 android:id="@+id/displayProductPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="21dp"
-                android:layout_marginTop="6dp"
-                android:text="TextView"
-                app:layout_constraintStart_toEndOf="@+id/displayProductImage"
+                android:layout_marginTop="5dp"
+                android:text="Product Price"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/textView22"
                 app:layout_constraintTop_toBottomOf="@+id/displayProductDesc" />
 
             <TextView
                 android:id="@+id/lblEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="153dp"
-                android:layout_marginEnd="11dp"
-                android:text="TextView"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="28dp"
+                android:text="Edit Product"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/displayProductPrice" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Rs."
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/displayProductImage"
+                app:layout_constraintTop_toBottomOf="@+id/displayProductDesc" />
+
+            <ImageView
+                android:id="@+id/addToWishlist"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="28dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/baseline_star_rate_24" />
+
+            <ImageView
+                android:id="@+id/addToCart"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintStart_toEndOf="@+id/displayProductImage"
+                app:layout_constraintTop_toBottomOf="@+id/displayProductPrice"
+                app:srcCompat="@drawable/baseline_shopping_cart_24" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
