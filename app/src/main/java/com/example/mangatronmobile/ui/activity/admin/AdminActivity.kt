@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.mangatronmobile.R
 import com.example.mangatronmobile.databinding.ActivityAdminBinding
+import com.example.mangatronmobile.ui.activity.home.HomeActivity
 import com.example.mangatronmobile.ui.fragment.CartFragment
 import com.example.mangatronmobile.ui.fragment.CategoryFragment
 import com.example.mangatronmobile.ui.fragment.HomeFragment
@@ -42,7 +43,9 @@ class AdminActivity : AppCompatActivity() {
                     val intent=Intent(this@AdminActivity, AddProductActivity::class.java)
                     startActivity(intent)
                 }
-                R.id.nav_home -> replaceFragment(HomeFragment())
+                R.id.nav_home -> {val intent=Intent(this@AdminActivity, HomeActivity::class.java)
+                    startActivity(intent)}
+
                 R.id.nav_category -> replaceFragment(CategoryFragment())
                 R.id.nav_cart -> replaceFragment(CartFragment())
                 R.id.nav_wishlist -> replaceFragment(WishlistFragment())
@@ -53,7 +56,8 @@ class AdminActivity : AppCompatActivity() {
 
         binding.adminBottomNavigationView.setOnItemSelectedListener { menu ->
             when (menu.itemId) {
-                R.id.navHome -> replaceFragment(HomeFragment())
+                R.id.navHome -> {val intent=Intent(this@AdminActivity, HomeActivity::class.java)
+                    startActivity(intent)}
                 R.id.navCategory -> replaceFragment(CategoryFragment())
                 R.id.nav_cart->replaceFragment(CartFragment())
                 R.id.navWishlist -> replaceFragment(WishlistFragment())

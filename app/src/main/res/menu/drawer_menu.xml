@@ -19,4 +19,9 @@
         android:id="@+id/nav_wishlist"
         android:icon="@drawable/wishlist"
         android:title="View Wishlist" />
+
+    <item
+        android:id="@+id/nav_admin"
+        android:icon="@drawable/baseline_person_24"
+        android:title="Open Admin Panel" />
 </menu>
