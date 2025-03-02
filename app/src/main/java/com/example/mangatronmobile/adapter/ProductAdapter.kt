@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.motion.widget.MotionScene.Transition.TransitionOnClick
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mangatronmobile.R
@@ -15,7 +16,8 @@ import com.example.mangatronmobile.ui.activity.admin.UpdateProductActivity
 class ProductAdapter(
     private val context: Context,
     private var data: ArrayList<ProductModel>,
-    private val onAddToCartClick: (ProductModel) -> Unit
+    private val onAddToCartClick: (ProductModel) -> Unit,
+    private val onAddToWishlistClick: (ProductModel)->Unit
 ) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -25,6 +27,7 @@ class ProductAdapter(
         val pImage: ImageView = itemView.findViewById(R.id.displayProductImage)
         val edit: TextView = itemView.findViewById(R.id.lblEdit)
         val AddToCart: ImageView = itemView.findViewById(R.id.addToCart)
+        val AddToWishlist: ImageView= itemView.findViewById(R.id.addToWishlist)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -59,6 +62,11 @@ class ProductAdapter(
         holder.AddToCart.setOnClickListener {
             Log.d("CartDebug", "Add to Cart clicked for product: ${product.productName}")
             onAddToCartClick(product)
+        }
+
+        holder.AddToWishlist.setOnClickListener {
+            Log.d("WishlistDebug","Add to Wishlist click for product: ${product.productName}")
+            onAddToWishlistClick(product)
         }
     }
 

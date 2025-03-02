@@ -31,7 +31,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/bestRecycler"
         android:layout_width="409dp"
         android:layout_height="162dp"
         android:layout_marginStart="1dp"
@@ -49,11 +49,12 @@
         android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/bestRecycler" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="406dp"
-        android:layout_height="176dp"
+        android:id="@+id/topRecycler"
+        android:layout_width="407dp"
+        android:layout_height="185dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         app:layout_constraintStart_toStartOf="parent"

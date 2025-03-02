@@ -13,6 +13,7 @@ import com.example.mangatron.repository.ProductRepository
 import com.example.mangatronmobile.databinding.FragmentMerchBinding
 import com.example.mangatronmobile.model.CartModel
 import com.example.mangatronmobile.model.ProductModel
+import com.example.mangatronmobile.model.WishlistModel
 import com.example.mangatronmobile.repository.CartRepository
 import com.example.mangatronmobile.repository.CartRepositoryImpl
 import com.example.mangatronmobile.repository.ProductRepositoryImpl
@@ -41,9 +42,8 @@ class MerchFragment : Fragment() {
         productRepository = ProductRepositoryImpl()
         cartRepository = CartRepositoryImpl()
 
-        productAdapter = ProductAdapter(requireContext(), productList, onAddToCartClick = { product ->
-            addToCart(product)
-        })
+        productAdapter =
+            ProductAdapter(requireContext(), productList, { product -> addToCart(product) }, { product -> addToWishlist(product) })
 
         binding.merchRecycler.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -89,6 +89,48 @@ class MerchFragment : Fragment() {
             }.addOnFailureListener {
                 Toast.makeText(requireContext(), "Failed to add to cart", Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun addToWishlist(product: ProductModel) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId == null) {
+            Toast.makeText(requireContext(), "User not logged in", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val wishlistRef = FirebaseDatabase.getInstance().getReference("Wishlist").child(userId)
+
+        product.productId?.let { productId ->
+            wishlistRef.child(productId).get()
+                .addOnSuccessListener { snapshot ->
+                    if (snapshot.exists()) {
+                        Toast.makeText(requireContext(), "Already in Wishlist", Toast.LENGTH_SHORT).show()
+                        println("DEBUG: Item already exists in Wishlist")
+                    } else {
+                        val wishlistId = System.currentTimeMillis().toString()
+                        val newWishlistItem = WishlistModel(
+                            wishlistId = wishlistId,
+                            productId = productId,
+                            productName = product.productName ?: "Unknown",
+                            productImage = product.productImage ?: "",
+                        )
+
+                        wishlistRef.child(wishlistId).setValue(newWishlistItem)
+                            .addOnSuccessListener {
+                                Toast.makeText(requireContext(), "Added to Wishlist", Toast.LENGTH_SHORT).show()
+                                println("DEBUG: Successfully added to Wishlist")
+                            }
+                            .addOnFailureListener { e ->
+                                Toast.makeText(requireContext(), "Failed to add to Wishlist", Toast.LENGTH_SHORT).show()
+                                println("DEBUG: Error adding to Wishlist: ${e.message}")
+                            }
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(requireContext(), "Failed to check Wishlist", Toast.LENGTH_SHORT).show()
+                    println("DEBUG: Error checking Wishlist: ${e.message}")
+                }
         }
     }
 

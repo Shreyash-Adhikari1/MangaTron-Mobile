@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mangatronmobile.adapter.CartAdapter
 import com.example.mangatronmobile.databinding.FragmentCartBinding
 import com.example.mangatronmobile.model.CartModel
@@ -75,13 +74,13 @@ class CartFragment : Fragment() {
 
         cartRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                cartList.clear() // ✅ Clear existing list before updating
+                cartList.clear()
                 for (itemSnapshot in snapshot.children) {
                     val cartItem = itemSnapshot.getValue(CartModel::class.java)
                     cartItem?.let { cartList.add(it) }
                 }
-                cartAdapter.notifyDataSetChanged()  // ✅ Update adapter correctly
-                fetchProductDetails() // ✅ Ensure product details are loaded after fetching cart
+                cartAdapter.notifyDataSetChanged()
+                fetchProductDetails()
             }
 
             override fun onCancelled(error: DatabaseError) {

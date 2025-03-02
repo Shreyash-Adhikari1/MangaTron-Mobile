@@ -1,11 +1,9 @@
 package com.example.mangatronmobile.adapter
 
 import android.content.Context
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -25,11 +23,11 @@ class CartAdapter(
 ) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val productImage: ImageView = itemView.findViewById(R.id.cartProductImage)
-        val productName: TextView = itemView.findViewById(R.id.cartProductName)
+        val productImage: ImageView = itemView.findViewById(R.id.wishlistProductImage)
+        val productName: TextView = itemView.findViewById(R.id.wishlistProductName)
         val productPrice: TextView = itemView.findViewById(R.id.cartProductPrice)
         val productQuantity: TextView = itemView.findViewById(R.id.cartProductQuantity)
-        val btnRemove: ImageView = itemView.findViewById(R.id.removeFromCart)
+        val btnRemove: ImageView = itemView.findViewById(R.id.removeFromWishlist)
         val btnDecrease: ImageView = itemView.findViewById(R.id.btnDecreaseQuantity)
         val btnIncrease: ImageView = itemView.findViewById(R.id.btnIncreaseQuantity)
     }

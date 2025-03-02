@@ -46,52 +46,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Product Name" />
 
-            <TextView
-                android:id="@+id/cartProductPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="12dp"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/wishlistProductImage"
-                app:layout_constraintTop_toBottomOf="@id/wishlistProductName"
-                tools:text="Price" />
-
-            <LinearLayout
-                android:id="@+id/quantityLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="12dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toEndOf="@+id/wishlistProductImage"
-                app:layout_constraintTop_toBottomOf="@+id/cartProductPrice">
-
-                <ImageView
-                    android:id="@+id/btnDecreaseQuantity"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:contentDescription="Decrease Quantity"
-                    android:src="@drawable/baseline_delete_24" />
-
-                <TextView
-                    android:id="@+id/cartProductQuantity"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textSize="16sp"
-                    tools:text="1" />
-
-                <ImageView
-                    android:id="@+id/btnIncreaseQuantity"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:contentDescription="Increase Quantity"
-                    android:src="@drawable/baseline_add_24" />
-            </LinearLayout>
-
             <ImageView
                 android:id="@+id/removeFromWishlist"
                 android:layout_width="40dp"
