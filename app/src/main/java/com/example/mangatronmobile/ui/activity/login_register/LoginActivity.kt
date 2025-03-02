@@ -10,7 +10,6 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.mangatronmobile.R
 import com.example.mangatronmobile.databinding.ActivityLoginBinding
 import com.example.mangatronmobile.repository.UserRepositoryImpl
-import com.example.mangatronmobile.ui.activity.admin.AdminActivity
 import com.example.mangatronmobile.ui.activity.home.HomeActivity
 import com.example.mangatronmobile.utils.LoadingUtils
 import com.example.mangatronmobile.viewmodel.UserViewModel
@@ -49,11 +48,7 @@ class LoginActivity : AppCompatActivity() {
                     loadingUtils.dismiss()
                     Toast.makeText(this@LoginActivity,message, Toast.LENGTH_LONG).show()
 
-                    val intent = if (email == "mangatronadmin@admin.com") {
-                        Intent(this@LoginActivity, AdminActivity::class.java) // Admin Redirect
-                    } else {
-                        Intent(this@LoginActivity, HomeActivity::class.java)
-                    }
+                    val intent =Intent(this@LoginActivity, HomeActivity::class.java)
                     startActivity(intent)
                     finish()
 

@@ -12,12 +12,10 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.mangatronmobile.R
 import com.example.mangatronmobile.databinding.ActivityHomeBinding
 import com.example.mangatronmobile.ui.activity.admin.AddProductActivity
-import com.example.mangatronmobile.ui.activity.admin.AdminActivity
 import com.example.mangatronmobile.ui.fragment.CartFragment
 import com.example.mangatronmobile.ui.fragment.CategoryFragment
 import com.example.mangatronmobile.ui.fragment.WishlistFragment
 import com.example.mangatronmobile.ui.fragment.HomeFragment
-import com.example.mangatronmobile.ui.fragment.SearchFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 
@@ -48,9 +46,9 @@ class HomeActivity : AppCompatActivity() {
         // Handle Navigation Menu Clicks
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_admin->{
+                R.id.nav_addProduct->{
                     if (email=="mangatronadmin@admin.com"){
-                        val intent=Intent(this@HomeActivity, AdminActivity::class.java)
+                        val intent=Intent(this@HomeActivity, AddProductActivity::class.java)
                         startActivity(intent)
                     }else{
                         Toast.makeText(this@HomeActivity,"Only Admin Can Access",Toast.LENGTH_LONG).show()
@@ -75,10 +73,6 @@ class HomeActivity : AppCompatActivity() {
                 else -> {}
             }
             true
-        }
-
-        binding.searchIcon.setOnClickListener{
-            replaceFragment(SearchFragment())
         }
 
         // Default Fragment

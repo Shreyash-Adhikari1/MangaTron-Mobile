@@ -14,6 +14,7 @@ import com.example.mangatronmobile.R
 import com.example.mangatronmobile.databinding.ActivityAddProductBinding
 import com.example.mangatronmobile.model.ProductModel
 import com.example.mangatronmobile.repository.ProductRepositoryImpl
+import com.example.mangatronmobile.ui.activity.home.HomeActivity
 import com.example.mangatronmobile.utils.ImageUtils
 import com.example.mangatronmobile.utils.LoadingUtils
 import com.example.mangatronmobile.viewmodel.ProductViewModel
@@ -55,6 +56,11 @@ class AddProductActivity : AppCompatActivity() {
         binding.btnAddProduct.setOnClickListener {
             Log.d("Image Upload", "Uploading image: $imageUri")
             uploadImage()
+        }
+
+        binding.backHome.setOnClickListener {
+            val intent= Intent(this@AddProductActivity, HomeActivity::class.java)
+            startActivity(intent)
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -104,7 +110,11 @@ class AddProductActivity : AppCompatActivity() {
 
         productViewModel.addProduct(model) { success, message ->
             Toast.makeText(this@AddProductActivity, message, Toast.LENGTH_LONG).show()
-            if (success) finish()
+            if (success){
+                val intent = Intent(this@AddProductActivity, HomeActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
             loadingUtils.dismiss()
         }
     }

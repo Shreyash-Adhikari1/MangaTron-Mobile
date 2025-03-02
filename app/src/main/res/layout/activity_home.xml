@@ -44,16 +44,6 @@
         </FrameLayout>
 
         <ImageView
-            android:id="@+id/searchIcon"
-            android:layout_width="30dp"
-            android:layout_height="34dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="44dp"
-            app:layout_constraintStart_toEndOf="@+id/homeTitle"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/search" />
-
-        <ImageView
             android:id="@+id/homeHamburger"
             android:layout_width="30dp"
             android:layout_height="34dp"
